@@ -1,0 +1,382 @@
+<h4 class="text-center mt-2">List Of Employees</h4>
+<br />
+
+<div class="container d-flex jusitfy-content-center">
+  <table class="table table-hover mt-4" style="background-color: #abc4e3">
+    <thead>
+      <tr>
+        <th scope="col">Emp-Id</th>
+        <th scope="col">Name</th>
+        <th scope="col">Date Of Joining</th>
+        <th scope="col">Age</th>
+        <th scope="col">Email</th>
+        <th scope="col">Designation</th>
+        <th scope="col">Gender</th>
+        <th scope="col">Salary</th>
+        <th>
+          <button
+            data-bs-toggle="modal"
+            data-bs-target="#addModal"
+            class="btn btn-outline-success"
+          >
+            Add
+          </button>
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let emp of fetchedEmployees">
+        <td>{{ emp.id }}</td>
+        <td>{{ emp.emp_name }}</td>
+        <td>{{ emp.date_of_joining }}</td>
+        <td>{{ emp.age }}</td>
+        <td>{{ emp.email }}</td>
+        <td>{{ emp.designation }}</td>
+        <td>{{ emp.gender }}</td>
+        <td>{{ emp.salary }}</td>
+
+        <td>
+          <button
+            type="button"
+            class="btn btn-outline-primary"
+            data-bs-toggle="modal"
+            data-bs-target="#editModal"
+            (click)="onEdit(emp)"
+          >
+            Edit
+          </button>
+        </td>
+        <td>
+          <button
+            class="btn btn-outline-danger"
+            (click)="DeleteEmployee(emp.id)"
+          >
+            Delete
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<!--Add Modal -->
+<div
+  class="modal fade"
+  id="addModal"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Add Employee</h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <form #f="ngForm" style="color: rgb(3, 18, 60)">
+          <div class="row mb-2">
+            <div class="form-group">
+              <label for="emp_name">Name</label>
+              <input
+                type="text"
+                id="emp_name"
+                class="form-control"
+                name="emp_name"
+                ngModel
+                required
+                #emp_name="ngModel"
+              />
+              <span
+                style="color: red"
+                class="small"
+                *ngIf="!emp_name.valid && emp_name.touched"
+                >Please enter a valid Name</span
+              >
+            </div>
+          </div>
+          <div class="row mb-2">
+            <div class="form-group">
+              <label for="doj">Date Of Joining</label>
+              <input
+                placeholder="YYYY-MM-DD"
+                type="text"
+                id="doj"
+                class="form-control"
+                name="date_of_joining"
+                ngModel
+                required
+                #date_of_joining="ngModel"
+              />
+              <span
+                style="color: red"
+                class="small"
+                *ngIf="!date_of_joining.valid && date_of_joining.touched"
+                >Please enter a valid Date</span
+              >
+            </div>
+          </div>
+          <div class="row mb-2">
+            <div class="form-group">
+              <label for="email">Email</label>
+              <input
+                type="text"
+                id="email"
+                class="form-control"
+                name="email"
+                ngModel
+                required
+                #email="ngModel"
+              />
+              <span
+                style="color: red"
+                class="small"
+                *ngIf="!email.valid && email.touched"
+                >Please enter a valid email</span
+              >
+            </div>
+          </div>
+          <div class="row mb-2">
+            <div class="form-group">
+              <label for="designation">Designation</label>
+              <input
+                type="text"
+                id="designation"
+                class="form-control"
+                name="designation"
+                ngModel
+                required
+                #designation="ngModel"
+              />
+              <span
+                style="color: red"
+                class="small"
+                *ngIf="!designation.valid && designation.touched"
+                >Please enter a valid designation</span
+              >
+              <div class="row mb-2">
+                <div class="form-group">
+                  <label for="age">Age</label>
+                  <input
+                    type="text"
+                    id="age"
+                    class="form-control"
+                    name="age"
+                    ngModel
+                    required
+                    #age="ngModel"
+                  />
+                  <span
+                    style="color: red"
+                    class="small"
+                    *ngIf="!age.valid && age.touched"
+                    >Please enter a valid Age</span
+                  >
+                </div>
+              </div>
+              <div class="row mb-2">
+                <div class="form-group">
+                  <label for="gender">Gender</label>
+                  <input
+                    type="text"
+                    id="gender"
+                    class="form-control"
+                    name="gender"
+                    ngModel
+                    required
+                    #gender="ngModel"
+                  />
+                  <span
+                    style="color: red"
+                    class="small"
+                    *ngIf="!gender.valid && gender.touched"
+                    >Please enter a valid gender</span
+                  >
+                </div>
+              </div>
+              <div class="row mb-2">
+                <div class="form-group">
+                  <label for="salary">Salary</label>
+                  <input
+                    type="text"
+                    id="salary"
+                    class="form-control"
+                    name="salary"
+                    ngModel
+                    required
+                    #salary="ngModel"
+                  />
+                  <span
+                    style="color: red"
+                    class="small"
+                    *ngIf="!salary.valid && salary.touched"
+                    >Please enter a valid salary</span
+                  >
+                </div>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+          Close
+        </button>
+        <button
+          type="button"
+          class="btn btn-primary"
+          [disabled]="!f.valid"
+          (click)="onAddEmployee(f.value, f)"
+        >
+          Save
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Edit Modal -->
+<div
+  class="modal fade"
+  id="editModal"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="loginForm" style="color: rgb(198, 196, 81)">
+          <div class="row mb-2">
+            <div class="form-group">
+              <label for="emp_name">Name</label>
+              <input
+                type="text"
+                id="emp_name"
+                class="form-control"
+                name="emp_name"
+                formControlName="emp_name"
+              />
+            </div>
+            <span
+              style="color: red"
+              class="small"
+              *ngIf="
+                !loginForm.get('emp_name').valid &&
+                loginForm.get('emp_name').touched
+              "
+              >Please enter a valid Name</span
+            >
+          </div>
+          <div class="row mb-2">
+            <div class="form-group">
+              <label for="date_of_joining">Date Of Joining</label>
+              <input
+                type="text"
+                id="date_of_joining"
+                class="form-control"
+                name="date_of_joining"
+                formControlName="date_of_joining"
+              />
+            </div>
+            <span
+              style="color: red"
+              class="small"
+              *ngIf="
+                !loginForm.get('date_of_joining').valid &&
+                loginForm.get('date_of_joining').touched
+              "
+              >Please enter a valid Date Of Joining</span
+            >
+          </div>
+          <div class="row mb-2">
+            <div class="form-group">
+              <label for="email">Email</label>
+              <input
+                type="text"
+                id="email"
+                class="form-control"
+                name="email"
+                formControlName="email"
+              />
+            </div>
+          </div>
+          <div class="row mb-2">
+            <div class="form-group">
+              <label for="designation">Designation</label>
+              <input
+                type="text"
+                id="designation"
+                class="form-control"
+                name="designation"
+                formControlName="designation"
+              />
+            </div>
+          </div>
+          <div class="row mb-2">
+            <div class="form-group">
+              <label for="gender">Gender</label>
+              <input
+                type="text"
+                id="gender"
+                class="form-control"
+                name="gender"
+                formControlName="gender"
+              />
+            </div>
+          </div>
+          <div class="row mb-2">
+            <div class="form-group">
+              <label for="age">Age</label>
+              <input
+                type="text"
+                id="age"
+                class="form-control"
+                name="age"
+                formControlName="age"
+              />
+            </div>
+          </div>
+          <div class="row mb-2">
+            <div class="form-group">
+              <label for="salary">Salary</label>
+              <input
+                type="text"
+                id="salary"
+                class="form-control"
+                name="salary"
+                formControlName="salary"
+              />
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+          Close
+        </button>
+        <button
+          type="button"
+          class="btn btn-primary"
+          (click)="updateEmployee()"
+        >
+          Save changes
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
