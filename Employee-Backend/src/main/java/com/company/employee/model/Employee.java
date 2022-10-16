@@ -35,6 +35,9 @@ public class Employee {
 
 	@Column(name = "salary")
 	private String salary;
+	
+	@Column(name="password")
+	private String password;
 
 	public int getId() {
 		return id;
@@ -99,5 +102,22 @@ public class Employee {
 	public void setSalary(String salary) {
 		this.salary = salary;
 	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	@Override
+	public String toString() {
+		return "Employee [id=" + id + ", emp_name=" + emp_name + ", date_of_joining=" + date_of_joining + ", gender="
+				+ gender + ", age=" + age + ", designation=" + designation + ", email=" + email + ", salary=" + salary
+				+ ", password=" + password + "]";
+	}
+	
+	
 
 }
