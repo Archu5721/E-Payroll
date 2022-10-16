@@ -16,7 +16,7 @@ import com.company.employee.repository.EmployeeRepo;
 import com.company.employee.service.EmployeeService;
 
 @RestController
-@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin(origins = "*")
 @RequestMapping("/Employees")
 public class EmployeeController {
 	
