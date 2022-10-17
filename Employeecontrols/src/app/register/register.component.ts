@@ -15,7 +15,7 @@ export class RegisterComponent implements OnInit {
   }
 
   onAddEmployee(employeeData: { emp_name:string,date_of_joining:string,email:string,designation:string,salary:number,gender:string,age:number,password:string }, form: NgForm) {
-    this.http.post("http://localhost:8080/Employees/addemployee", employeeData).subscribe((responseData) => {
+    this.http.post("http://localhost:8081/Employees/addemployee", employeeData).subscribe((responseData) => {
       // console.log(responseData);
       alert("Employee added Successfully!!");
       form.reset();
